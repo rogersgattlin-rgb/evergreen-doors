@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book an Info Call | Evergreen Doors Marketing</title>
+<meta name="description" content="Book a free 20-minute info call with Evergreen Doors Marketing. Answer a few quick questions, then pick a time.">
+<meta name="theme-color" content="#1F3A2B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky:#E7EDE6; --paper:#F5F6F1; --white:#FCFCF9;
+  --spruce:#1F3A2B; --moss:#5C805F; --lichen:#C2D3BF;
+  --ink:#18261D; --body:#4C5747; --soft:#6E7868; --line:#D7DDD2;
+  --gold:#C98A2B; --gold-hover:#B57A22; --gold-text:#8E5C10; --on-gold:#22170A; --error:#A13A22;
+  --serif:"Newsreader",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif;
+  --gutter:clamp(16px,4vw,40px);
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#D6E2D7,var(--sky) 380px,var(--paper) 760px);color:var(--ink);font:400 17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+h1,h2{font-family:var(--serif);font-weight:400;margin:0;letter-spacing:-.015em}
+p{margin:0}
+.nav{display:flex;align-items:center;justify-content:space-between;height:88px;padding:0 var(--gutter)}
+.nav img{height:52px;width:auto;display:block}
+.nav .back{font-size:15px;font-weight:500;color:var(--body);text-decoration:none}
+.nav .back:hover{color:var(--spruce)}
+main{max-width:760px;margin:0 auto;padding:clamp(24px,5vw,56px) var(--gutter) 96px}
+.steps{display:flex;gap:10px;font-size:14px;font-weight:600;color:var(--soft);margin-bottom:18px}
+.steps span{display:inline-flex;align-items:center;gap:8px}
+.steps i{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line);font-style:normal;font-size:13px}
+.steps .on{color:var(--spruce)}
+.steps .on i{background:var(--spruce);border-color:var(--spruce);color:var(--white)}
+.steps .done i{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+h1{font-size:clamp(40px,6vw,64px);line-height:1;color:var(--spruce);text-wrap:balance}
+.intro{color:var(--body);font-size:18px;margin-top:16px;max-width:52ch}
+.card{background:var(--white);border:1px solid var(--line);padding:clamp(22px,4vw,40px);margin-top:32px}
+form{display:grid;gap:22px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+label{display:block;font-weight:600;font-size:15px;margin-bottom:7px;color:var(--ink)}
+label .opt{font-weight:400;color:var(--soft)}
+input,select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid #C7D0C3;border-radius:6px;padding:12px 14px}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
+.err{display:none;color:var(--error);font-size:14px;margin-top:6px}
+.field.bad .err{display:block}
+.field.bad input,.field.bad select,.field.bad textarea{border-color:var(--error)}
+.actions{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:4px}
+.actions p{font-size:14px;color:var(--soft);max-width:34ch}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border:0;border-radius:6px;background:var(--gold);color:var(--on-gold);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--gold-hover)}
+.btn svg{width:16px;height:16px}
+#step2[hidden],#step1[hidden]{display:none}
+.calendly-inline-widget{min-width:300px;height:1000px;margin-top:24px;background:var(--white);border:1px solid var(--line)}
+.edit{background:none;border:0;padding:0;font:600 15px var(--sans);color:var(--spruce);text-decoration:underline;cursor:pointer}
+.fallback{margin-top:16px;font-size:15px;color:var(--soft)}
+footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14px;color:var(--soft);text-align:center}
+@media (max-width:640px){
+  .row{grid-template-columns:1fr}
+  .nav img{height:42px}
+  .actions{flex-direction:column;align-items:stretch;text-align:center}
+  .actions p{max-width:none}
+  .btn{justify-content:center}
+  .calendly-inline-widget{height:1100px}
+}
+</style>
+</head>
+<body>
+<header class="nav">
+  <a href="index.html"><img src="logo.svg" width="568" height="130" alt="Evergreen Doors Marketing"></a>
+  <a class="back" href="index.html">Back to site</a>
+</header>
+
+<main>
+  <section id="step1" aria-labelledby="q-title">
+    <div class="steps" aria-hidden="true"><span class="on"><i>1</i>A few questions</span><span><i>2</i>Pick a time</span></div>
+    <h1 id="q-title">Book an info call</h1>
+    <p class="intro">Answer a few quick questions so I can come prepared. It takes about two minutes, and then you'll pick a time that works for you.</p>
+
+    <div class="card">
+      <form id="qform" novalidate>
+        <div class="row">
+          <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required><p class="err">Enter your name.</p></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required><p class="err">Enter a valid email address.</p></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="company">Company name</label><input id="company" name="company" autocomplete="organization" required><p class="err">Enter your company name.</p></div>
+          <div class="field"><label for="website">Website <span class="opt">(optional)</span></label><input id="website" name="website" inputmode="url" placeholder="yourcompany.com"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="industry">What kind of business is it?</label>
+            <select id="industry" name="industry" required>
+              <option value="">Choose one</option>
+              <option>Property or vacation rental management</option>
+              <option>Real estate</option>
+              <option>Home services</option>
+              <option>B2B or professional services</option>
+              <option>Other</option>
+            </select><p class="err">Choose the closest option.</p></div>
+          <div class="field"><label for="market">Main market or city</label><input id="market" name="market" placeholder="Scottsdale, AZ" required><p class="err">Enter your main market.</p></div>
+        </div>
+        <div class="field"><label for="source">How do most of your new clients find you today?</label>
+          <select id="source" name="source" required>
+            <option value="">Choose one</option>
+            <option>Referrals and word of mouth</option>
+            <option>Online listings or search</option>
+            <option>Paid ads</option>
+            <option>Our own outreach</option>
+            <option>Not sure</option>
+          </select><p class="err">Choose the closest option.</p></div>
+        <div class="field"><label for="goal">How many new clients would you like to add per month?</label>
+          <select id="goal" name="goal" required>
+            <option value="">Choose one</option>
+            <option>1 to 2</option>
+            <option>3 to 5</option>
+            <option>6 to 10</option>
+            <option>More than 10</option>
+          </select><p class="err">Choose a range.</p></div>
+        <div class="field"><label for="challenge">What's the biggest thing holding back your growth right now? <span class="opt">(optional)</span></label><textarea id="challenge" name="challenge" maxlength="800"></textarea></div>
+        <div class="actions">
+          <p>Your answers are only used to prepare for our call.</p>
+          <button class="btn" type="submit">Continue to pick a time <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="step2" hidden aria-labelledby="t-title">
+    <div class="steps" aria-hidden="true"><span class="done"><i>&#10003;</i>A few questions</span><span class="on"><i>2</i>Pick a time</span></div>
+    <h1 id="t-title" tabindex="-1">Pick a time</h1>
+    <p class="intro">Thanks, <span id="first"></span>. Choose a time below and you'll get a Google Meet link by email. <button class="edit" type="button" id="editBtn">Edit my answers</button></p>
+    <div id="cal" class="calendly-inline-widget"></div>
+    <p class="fallback">Calendar not loading? <a id="calLink" href="https://calendly.com/gattlin-evergreendoorsmarketing/30min" target="_blank" rel="noopener">Open the booking page in a new tab</a>.</p>
+  </section>
+</main>
+
+<footer>&copy; 2026 Evergreen Doors Marketing</footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script>
+(function(){
+  var CAL = "https://calendly.com/gattlin-evergreendoorsmarketing/30min";
+  var form = document.getElementById("qform");
+  var step1 = document.getElementById("step1"), step2 = document.getElementById("step2");
+  var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function val(id){ return document.getElementById(id).value.trim(); }
+  function check(field){
+    var el = field.querySelector("input,select,textarea");
+    var ok = !el.required || (el.value.trim() !== "" && (el.type !== "email" || emailRe.test(el.value.trim())));
+    field.classList.toggle("bad", !ok);
+    return ok;
+  }
+  form.querySelectorAll(".field").forEach(function(f){
+    var el = f.querySelector("input,select,textarea");
+    el.addEventListener("input", function(){ if (f.classList.contains("bad")) check(f); });
+    el.addEventListener("change", function(){ if (f.classList.contains("bad")) check(f); });
+  });
+
+  function summary(){
+    return [
+      "Company: " + val("company"),
+      "Website: " + (val("website") || "n/a"),
+      "Business type: " + val("industry"),
+      "Market: " + val("market"),
+      "Clients come from: " + val("source"),
+      "Monthly client goal: " + val("goal"),
+      "Biggest challenge: " + (val("challenge") || "n/a")
+    ].join("\n");
+  }
+
+  function showCalendar(){
+    var name = val("name"), email = val("email"), notes = summary();
+    var url = CAL + "?hide_gdpr_banner=1&primary_color=c98a2b"
+      + "&name=" + encodeURIComponent(name)
+      + "&email=" + encodeURIComponent(email)
+      + "&a1=" + encodeURIComponent(notes);
+    document.getElementById("calLink").href = url;
+    document.getElementById("first").textContent = name.split(" ")[0];
+    var box = document.getElementById("cal");
+    box.innerHTML = "";
+    function init(){
+      if (window.Calendly && Calendly.initInlineWidget) {
+        Calendly.initInlineWidget({ url: CAL + "?hide_gdpr_banner=1&primary_color=c98a2b", parentElement: box,
+          prefill: { name: name, email: email, customAnswers: { a1: notes } } });
+      } else { setTimeout(init, 200); }
+    }
+    init();
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var fields = Array.prototype.slice.call(form.querySelectorAll(".field"));
+    var bad = fields.filter(function(f){ return !check(f); });
+    if (bad.length) { bad[0].querySelector("input,select,textarea").focus(); return; }
+    showCalendar();
+    step1.hidden = true; step2.hidden = false;
+    window.scrollTo(0, 0);
+    document.getElementById("t-title").focus();
+  });
+
+  document.getElementById("editBtn").addEventListener("click", function(){
+    step2.hidden = true; step1.hidden = false; window.scrollTo(0, 0);
+  });
+})();
+</script>
+</body>
+</html>
