@@ -42,13 +42,20 @@ h1{font-size:clamp(40px,6vw,64px);line-height:1;color:var(--spruce);text-wrap:ba
 form{display:grid;gap:22px}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:22px}
 label{display:block;font-weight:600;font-size:15px;margin-bottom:7px;color:var(--ink)}
-label .opt{font-weight:400;color:var(--soft)}
+label .opt,legend .opt{font-weight:400;color:var(--soft)}
 input,select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--paper);border:1px solid #C7D0C3;border-radius:6px;padding:12px 14px}
 textarea{min-height:110px;resize:vertical}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
 .err{display:none;color:var(--error);font-size:14px;margin-top:6px}
 .field.bad .err{display:block}
 .field.bad input,.field.bad select,.field.bad textarea{border-color:var(--error)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-weight:600;font-size:15px;margin-bottom:10px;padding:0;color:var(--ink)}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check{display:flex;align-items:center;gap:10px;font-weight:500;margin:0;padding:12px 14px;background:var(--paper);border:1px solid #C7D0C3;border-radius:6px;cursor:pointer}
+.check input{width:18px;height:18px;margin:0;accent-color:var(--spruce);flex:none}
+.check:has(input:checked){border-color:var(--spruce);background:#EEF2EC}
+.field.bad .check{border-color:var(--error)}
 .actions{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:4px}
 .actions p{font-size:14px;color:var(--soft);max-width:34ch}
 .btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border:0;border-radius:6px;background:var(--gold);color:var(--on-gold);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:none}
@@ -60,7 +67,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--gold);outline-of
 .fallback{margin-top:16px;font-size:15px;color:var(--soft)}
 footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14px;color:var(--soft);text-align:center}
 @media (max-width:640px){
-  .row{grid-template-columns:1fr}
+  .row,.checks{grid-template-columns:1fr}
   .nav img{height:42px}
   .actions{flex-direction:column;align-items:stretch;text-align:center}
   .actions p{max-width:none}
@@ -112,15 +119,27 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
             <option>Our own outreach</option>
             <option>Not sure</option>
           </select><p class="err">Choose the closest option.</p></div>
-        <div class="field"><label for="goal">How many new clients would you like to add per month?</label>
-          <select id="goal" name="goal" required>
+        <fieldset class="field group" id="needs"><legend>What do you need help with? <span class="opt">(choose all that apply)</span></legend>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="needs" value="Lead lists"> Lead lists</label>
+            <label class="check"><input type="checkbox" name="needs" value="Outreach campaigns"> Outreach campaigns</label>
+            <label class="check"><input type="checkbox" name="needs" value="CRM and automation"> CRM and automation</label>
+            <label class="check"><input type="checkbox" name="needs" value="Website design or redesign"> Website design or redesign</label>
+            <label class="check"><input type="checkbox" name="needs" value="Social media and Meta ads"> Social media and Meta ads</label>
+            <label class="check"><input type="checkbox" name="needs" value="Not sure yet"> Not sure yet</label>
+          </div><p class="err">Choose at least one.</p></fieldset>
+        <div class="field"><label for="challenge">What's the biggest thing holding back your growth right now?</label><textarea id="challenge" name="challenge" maxlength="800" required></textarea><p class="err">Tell me a little about your biggest challenge.</p></div>
+        <div class="field"><label for="heard">How did you hear about Evergreen Doors?</label>
+          <select id="heard" name="heard" required>
             <option value="">Choose one</option>
-            <option>1 to 2</option>
-            <option>3 to 5</option>
-            <option>6 to 10</option>
-            <option>More than 10</option>
-          </select><p class="err">Choose a range.</p></div>
-        <div class="field"><label for="challenge">What's the biggest thing holding back your growth right now? <span class="opt">(optional)</span></label><textarea id="challenge" name="challenge" maxlength="800"></textarea></div>
+            <option>Google search</option>
+            <option>Facebook</option>
+            <option>Instagram</option>
+            <option>LinkedIn</option>
+            <option>Referral from someone I know</option>
+            <option>A message or call from Evergreen Doors</option>
+            <option>Other</option>
+          </select><p class="err">Choose the closest option.</p></div>
         <div class="actions">
           <p>Your answers are only used to prepare for our call.</p>
           <button class="btn" type="submit">Continue to pick a time <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></button>
@@ -151,25 +170,29 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
   function val(id){ return document.getElementById(id).value.trim(); }
   function check(field){
     var el = field.querySelector("input,select,textarea");
-    var ok = !el.required || (el.value.trim() !== "" && (el.type !== "email" || emailRe.test(el.value.trim())));
+    var ok = field.classList.contains("group") ? field.querySelectorAll("input:checked").length > 0
+      : (!el.required || (el.value.trim() !== "" && (el.type !== "email" || emailRe.test(el.value.trim()))));
     field.classList.toggle("bad", !ok);
     return ok;
   }
   form.querySelectorAll(".field").forEach(function(f){
-    var el = f.querySelector("input,select,textarea");
-    el.addEventListener("input", function(){ if (f.classList.contains("bad")) check(f); });
-    el.addEventListener("change", function(){ if (f.classList.contains("bad")) check(f); });
+    ["input","change"].forEach(function(t){ f.addEventListener(t, function(){ if (f.classList.contains("bad")) check(f); }); });
   });
+
+  function needs(){
+    return Array.prototype.map.call(form.querySelectorAll("input[name=needs]:checked"), function(i){ return i.value; }).join(", ");
+  }
 
   function summary(){
     return [
+      "Needs help with: " + needs(),
       "Company: " + val("company"),
       "Website: " + (val("website") || "n/a"),
       "Business type: " + val("industry"),
       "Market: " + val("market"),
       "Clients come from: " + val("source"),
-      "Monthly client goal: " + val("goal"),
-      "Biggest challenge: " + (val("challenge") || "n/a")
+      "Biggest challenge: " + val("challenge"),
+      "Heard about us: " + val("heard")
     ].join("\n");
   }
 
