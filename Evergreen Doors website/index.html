@@ -55,6 +55,8 @@ footer .wordmark img{height:38px}
 .nav-links a:hover{color:var(--spruce)}
 .nav-links .nav-book{color:var(--spruce);border:1.5px solid var(--spruce);padding:9px 16px;border-radius:6px}
 .nav-links .nav-book:hover{background:var(--spruce);color:var(--white)}
+.nav-links .nav-cta{display:inline-block;background:var(--gold);color:var(--on-gold);font-weight:600;padding:11px 18px;border-radius:6px;transition:background .15s}
+.nav-links .nav-cta:hover{background:var(--gold-hover);color:var(--on-gold)}
 
 /* Forest (shared by hero and closing section) */
 .forest{position:relative;aspect-ratio:3/1;min-height:230px;max-width:100%;margin-top:clamp(24px,4vw,56px)}
@@ -68,15 +70,13 @@ footer .wordmark img{height:38px}
 /* Hero */
 .hero{background:linear-gradient(180deg,var(--sky-top),var(--sky) 60%,#EBF0EA);padding-top:clamp(140px,17vw,200px);overflow:hidden}
 .hero h1{font-size:clamp(50px,8.6vw,124px);line-height:.96;color:var(--spruce);max-width:13ch;letter-spacing:-.03em}
-.hero-foot{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--gutter);align-items:end;margin-top:clamp(28px,4vw,44px)}
+.hero-foot{display:grid;gap:30px;justify-items:start;margin-top:clamp(28px,4vw,44px)}
 .hero-foot p{font-size:clamp(17px,1.6vw,20px);color:var(--body);max-width:40ch}
-.hero-actions{display:flex;gap:28px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
-.hero-actions .text-link{color:var(--spruce)}
+.hero-actions{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
 
 /* Statement band */
 .statement{background:var(--spruce);color:#E9EEE7;padding:clamp(40px,5vw,72px) 0 clamp(80px,10vw,140px)}
 .statement p{font-family:var(--serif);font-size:clamp(26px,3.3vw,42px);line-height:1.22;max-width:31ch;letter-spacing:-.01em}
-.statement p span{color:var(--lichen)}
 
 /* Section scaffolding */
 section.block{padding:clamp(80px,10vw,140px) 0}
@@ -84,18 +84,24 @@ section.block{padding:clamp(80px,10vw,140px) 0}
 .block-head h2{font-size:clamp(40px,5.4vw,72px);line-height:1;color:var(--spruce)}
 .block-head p{color:var(--soft);font-size:16px;max-width:34ch}
 
-/* Services index */
-.svc{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--spruce)}
-.svc > li{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) minmax(0,3fr);gap:var(--gutter);padding:34px 0;border-bottom:1px solid var(--line)}
-.svc h3{font-size:clamp(28px,3vw,38px);line-height:1.05;color:var(--spruce)}
-.svc p{color:var(--body)}
-.svc ul{list-style:none;margin:0;padding:0;font-size:15px;color:var(--soft)}
-.svc ul li{padding:3px 0 3px 18px;position:relative}
-.svc ul li::before{content:"";position:absolute;left:0;top:13px;width:8px;height:1.5px;background:var(--gold)}
-.also{margin-top:56px}
-.also h4{font:600 15px/1.4 var(--sans);color:var(--soft);margin:0 0 6px}
-.svc.small{border-top:1px solid var(--line)}
-.svc.small h3{font-size:clamp(23px,2.2vw,28px)}
+/* Services: big titles, each opens to its details */
+.svc-list{border-top:1.5px solid var(--spruce)}
+.svc-item{border-bottom:1px solid var(--line)}
+.svc-item summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:clamp(22px,3vw,34px) 0;cursor:pointer}
+.svc-item summary::-webkit-details-marker{display:none}
+.svc-item h3{font-size:clamp(34px,4.6vw,60px);line-height:1.02;color:var(--spruce);letter-spacing:-.02em;transition:color .15s}
+.svc-item summary:hover h3{color:var(--moss)}
+.svc-item .tag{display:block;font:600 14px/1.4 var(--sans);color:var(--gold-text);margin-bottom:6px;letter-spacing:0}
+.toggle{flex:none;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--spruce);display:grid;place-items:center;color:var(--spruce);transition:background .15s,color .15s,transform .25s}
+.toggle svg{width:18px;height:18px}
+.svc-item summary:hover .toggle{background:var(--spruce);color:var(--white)}
+.svc-item[open] .toggle{transform:rotate(45deg);background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
+.svc-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);padding:0 72px clamp(28px,3vw,40px) 0}
+.svc-body p{color:var(--body);font-size:19px;max-width:52ch}
+.svc-body ul{list-style:none;margin:0;padding:0;font-size:16px;color:var(--body)}
+.svc-body ul li{padding:4px 0 4px 20px;position:relative}
+.svc-body ul li::before{content:"";position:absolute;left:0;top:15px;width:10px;height:1.5px;background:var(--gold)}
+@media (prefers-reduced-motion:no-preference){.svc-item[open] .svc-body{animation:open .3s ease-out}@keyframes open{from{opacity:0;transform:translateY(-6px)}}}
 .made-here{margin-top:28px;font-size:15px;color:var(--soft)}
 .made-here a{color:var(--spruce)}
 
@@ -103,18 +109,17 @@ section.block{padding:clamp(80px,10vw,140px) 0}
 .experience{background:var(--sky)}
 .exp-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(32px,6vw,96px);align-items:start}
 .exp-grid h2{font-size:clamp(40px,5.2vw,70px);line-height:1.02;color:var(--spruce)}
-.exp-copy p{color:var(--body);font-size:18px}
-.exp-copy p + p{margin-top:18px}
-.sectors{display:grid;grid-template-columns:1fr 1fr;margin-top:30px;border-top:1px solid var(--line);font-size:15px;font-weight:500}
-.sectors span{padding:14px 0;border-bottom:1px solid var(--line)}
-.sectors span:nth-child(odd){padding-right:12px}
+.exp-lead{color:var(--body);font-size:19px;margin-top:24px;max-width:46ch}
+.who-title{font:600 15px/1.4 var(--sans);color:var(--gold-text);margin-bottom:8px}
+.sectors{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--spruce)}
+.sectors li{font-family:var(--serif);font-size:clamp(24px,2.4vw,32px);line-height:1.15;color:var(--spruce);padding:18px 0 18px 34px;border-bottom:1px solid var(--line);position:relative}
+.sectors li::before{content:"";position:absolute;left:2px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--gold)}
 
 /* Timeline */
 .timeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:relative}
 .timeline::before{content:"";position:absolute;left:0;right:0;top:9px;height:1.5px;background:var(--spruce)}
 .timeline li{position:relative;padding:44px 28px 0 0}
-.timeline li::before{content:"";position:absolute;top:2px;left:0;width:16px;height:16px;border-radius:50%;background:var(--paper);border:1.5px solid var(--spruce)}
-.timeline li:last-child::before{background:var(--gold);border-color:var(--gold)}
+.timeline li::before{content:"";position:absolute;top:2px;left:0;width:16px;height:16px;border-radius:50%;background:var(--gold);border:1.5px solid var(--gold)}
 .timeline .when{font-size:14px;font-weight:600;color:var(--gold-text)}
 .timeline h3{font-size:27px;color:var(--spruce);margin:6px 0 10px;line-height:1.1}
 .timeline p{color:var(--body);font-size:16px}
@@ -126,27 +131,27 @@ section.block{padding:clamp(80px,10vw,140px) 0}
 .bill-item{border-top:1.5px solid var(--spruce);padding-top:20px}
 .bill-item h3{font-size:30px;color:var(--spruce);line-height:1.1;margin-bottom:12px}
 .bill-item p{color:var(--body)}
-.bill-note{grid-column:2 / -1;margin-top:8px;color:var(--soft);font-size:15px}
+.bill-note{grid-column:1 / -1;margin-top:clamp(24px,3vw,40px);text-align:center;font-family:var(--serif);font-size:clamp(20px,2vw,24px);color:var(--spruce)}
 
 /* Founder */
 .letter-wrap{background:var(--sky)}
 .founder-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:center}
 .founder-photo{margin:0}
 .founder-photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:4px;background:var(--lichen)}
-.founder-photo figcaption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;font-size:15px;border-top:1px solid var(--line);padding-top:12px}
-.founder-photo .who{font-weight:600;color:var(--ink)}
+.founder-photo figcaption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;font-family:var(--serif);font-size:18px;border-top:1px solid var(--line);padding-top:12px}
+.founder-photo .who{font-weight:500;color:var(--ink)}
 .founder-photo .role{color:var(--soft)}
 .letter{background:var(--white);border:1px solid var(--line);padding:clamp(28px,4.5vw,60px)}
 .letter h2{font-size:clamp(34px,4vw,48px);line-height:1.1;color:var(--spruce);font-style:italic;margin-bottom:22px}
 .letter p{font-family:var(--serif);font-size:20px;line-height:1.6;color:#2E3A30;max-width:58ch}
 .letter p + p{margin-top:18px}
-.letter .signoff{margin-top:30px;font-family:var(--sans);font-size:16px;color:var(--soft)}
+.letter .signoff{margin-top:30px;font-style:italic;font-size:24px;color:var(--spruce)}
 
 /* Closing bookend */
 .closing{background:linear-gradient(180deg,var(--sky),#EBF0EA);padding-top:clamp(70px,9vw,120px)}
 .closing .forest{margin-top:clamp(10px,3vw,40px)}
 .closing .forest img{transform:scaleX(-1)}
-.closing h2{font-size:clamp(44px,6.4vw,92px);line-height:.98;color:var(--spruce);max-width:12ch;letter-spacing:-.025em}
+.closing h2{font-size:clamp(44px,6.4vw,92px);line-height:.98;color:var(--spruce);max-width:14ch;letter-spacing:-.025em}
 .closing-band{background:var(--spruce);color:#E9EEE7;padding:clamp(30px,4vw,56px) 0 0}
 .closing-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:end;padding-bottom:clamp(70px,9vw,120px)}
 .closing-grid .lead{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);line-height:1.25;color:#E9EEE7;max-width:22ch}
@@ -161,9 +166,9 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
 
 /* Responsive */
 @media (max-width:960px){
-  .nav-links{display:none}
-  .svc > li{grid-template-columns:1fr 1fr}
-  .svc > li h3{grid-column:1 / -1}
+  .nav-links li:not(.cta-li){display:none}
+  .nav-links .nav-cta{padding:9px 14px;font-size:14px}
+  .svc-body{grid-template-columns:1fr;padding-right:0;gap:18px}
   .exp-grid,.closing-grid,.founder-grid{grid-template-columns:1fr}
   .founder-photo{max-width:420px}
   .timeline{grid-template-columns:1fr 1fr;row-gap:44px}
@@ -181,11 +186,9 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
   .closing-grid .lead,.closing-grid p.small{margin-left:auto;margin-right:auto}
   footer .wrap{flex-direction:column;justify-content:center;text-align:center}
   body{font-size:16px}
-  .hero-foot{grid-template-columns:1fr}
-  .hero-actions{justify-content:flex-start;flex-direction:row-reverse}
-  .svc > li{grid-template-columns:1fr;gap:12px;padding:28px 0}
+  .toggle{width:40px;height:40px}
+  .svc-body p{font-size:17px}
   .timeline,.bill-grid{grid-template-columns:1fr}
-  .sectors{grid-template-columns:1fr}
   .letter p{font-size:18px}
   .forest{margin-top:0}
   .nav .wordmark img{height:42px}
@@ -203,6 +206,7 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
         <li><a href="#services">Services</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#founder">About</a></li>
+        <li class="cta-li"><a class="nav-cta" href="book.html">Book a call</a></li>
       </ul>
     </nav>
   </div>
@@ -215,7 +219,6 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
       <div class="hero-foot">
         <p>Evergreen Doors designs and runs client-acquisition systems for service businesses: the lead lists, outreach, and follow-up that turn strangers into booked calls.</p>
         <div class="hero-actions">
-          <a class="text-link" href="#services">See services</a>
           <a class="btn" href="book.html">Book an info call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
         </div>
       </div>
@@ -230,66 +233,57 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
 
   <div class="statement">
     <div class="wrap">
-      <p>Most service businesses grow on referrals and good timing. <span>We build the system that keeps new conversations coming in every week, whether anyone thinks to refer you or not.</span></p>
+      <p>Most service businesses grow on referrals and good timing. We build the system that keeps new conversations coming in every week, whether anyone thinks to refer you or not.</p>
     </div>
   </div>
+
+  <section class="block experience" aria-labelledby="exp-title">
+    <div class="wrap exp-grid">
+      <div>
+        <h2 id="exp-title">Tested in a tough market. Built for yours.</h2>
+        <p class="exp-lead">Our system was built in luxury short-term rental management, where every homeowner is already being pitched by other managers and trust takes months to earn. If it can win clients there, it can win them for you.</p>
+      </div>
+      <div class="exp-copy">
+        <h3 class="who-title">Who we work with</h3>
+        <ul class="sectors">
+          <li>Property and rental managers</li>
+          <li>Real estate teams</li>
+          <li>Home service companies</li>
+          <li>B2B and professional services</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <section class="block" id="services" aria-labelledby="services-title">
     <div class="wrap">
       <div class="block-head">
         <h2 id="services-title">Services</h2>
-        <p>Run together as one system, or brought in where your current process is leaking.</p>
+        <p>Tap any service to see what's included. Run them together as one system, or bring in just the piece you need.</p>
       </div>
-      <ul class="svc">
-        <li>
-          <h3>Lead lists</h3>
-          <p>We find the right prospects in your market, then verify and clean the data so every message reaches a real decision-maker.</p>
-          <ul><li>Targeted prospect lists</li><li>Skip tracing and verification</li><li>Ongoing list refreshes</li></ul>
-        </li>
-        <li>
-          <h3>Outreach campaigns</h3>
-          <p>Personalized text, voicemail, and email sequences written for your market and sent through properly registered channels.</p>
-          <ul><li>Multi-touch sequences</li><li>Copy and personalization</li><li>Compliance setup</li></ul>
-        </li>
-        <li>
-          <h3>CRM and automation</h3>
-          <p>Pipelines, automated follow-up, and reporting in GoHighLevel, so every lead is tracked and nobody falls through the cracks.</p>
-          <ul><li>Pipeline design</li><li>Follow-up automations</li><li>Weekly reporting</li></ul>
-        </li>
-      </ul>
-
-      <div class="also">
-        <h4>Also available</h4>
-        <ul class="svc small">
-          <li>
-            <h3>Website design and redesign</h3>
-            <p>Fast, considered websites that make a strong first impression and turn visitors into booked calls.</p>
-            <ul><li>Design and build</li><li>Copywriting</li><li>Hosting and domain setup</li></ul>
-          </li>
-          <li>
-            <h3>Social media and Meta ads</h3>
-            <p>Content and paid campaigns on Facebook and Instagram that keep you in front of the right people between conversations.</p>
-            <ul><li>Campaign setup</li><li>Ad creative</li><li>Audience targeting</li></ul>
-          </li>
-        </ul>
-        <p class="made-here">This website was designed and built by Evergreen Doors. <a class="text-link" href="#book">Ask about yours</a></p>
+      <div class="svc-list">
+        <details class="svc-item">
+          <summary><h3>Lead lists</h3><span class="toggle" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2v14M2 9h14"/></svg></span></summary>
+          <div class="svc-body"><p>We find the right prospects in your market, then verify and clean the data so every message reaches a real decision-maker.</p><ul><li>Targeted prospect lists</li><li>Skip tracing and verification</li><li>Ongoing list refreshes</li></ul></div>
+        </details>
+        <details class="svc-item">
+          <summary><h3>Outreach campaigns</h3><span class="toggle" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2v14M2 9h14"/></svg></span></summary>
+          <div class="svc-body"><p>Personalized text, voicemail, and email sequences written for your market and sent through properly registered channels.</p><ul><li>Multi-touch sequences</li><li>Copy and personalization</li><li>Compliance setup</li></ul></div>
+        </details>
+        <details class="svc-item">
+          <summary><h3>CRM and automation</h3><span class="toggle" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2v14M2 9h14"/></svg></span></summary>
+          <div class="svc-body"><p>Pipelines, automated follow-up, and reporting in GoHighLevel, so every lead is tracked and nobody falls through the cracks.</p><ul><li>Pipeline design</li><li>Follow-up automations</li><li>Weekly reporting</li></ul></div>
+        </details>
+        <details class="svc-item">
+          <summary><h3><span class="tag">Also available</span>Website design and redesign</h3><span class="toggle" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2v14M2 9h14"/></svg></span></summary>
+          <div class="svc-body"><p>Fast, considered websites that make a strong first impression and turn visitors into booked calls.</p><ul><li>Design and build</li><li>Copywriting</li><li>Hosting and domain setup</li></ul></div>
+        </details>
+        <details class="svc-item">
+          <summary><h3><span class="tag">Also available</span>Social media and Meta ads</h3><span class="toggle" aria-hidden="true"><svg viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 2v14M2 9h14"/></svg></span></summary>
+          <div class="svc-body"><p>Content and paid campaigns on Facebook and Instagram that keep you in front of the right people between conversations.</p><ul><li>Campaign setup</li><li>Ad creative</li><li>Audience targeting</li></ul></div>
+        </details>
       </div>
-    </div>
-  </section>
-
-  <section class="block experience" aria-labelledby="exp-title">
-    <div class="wrap exp-grid">
-      <h2 id="exp-title">Built where winning a client is hardest.</h2>
-      <div class="exp-copy">
-        <p>Our system was developed in luxury short-term rental management, where every homeowner is already being pitched by other managers and trust takes months to earn.</p>
-        <p>What works there works anywhere a single new client is worth real money.</p>
-        <div class="sectors">
-          <span>Property and rental managers</span>
-          <span>Real estate teams</span>
-          <span>Home service companies</span>
-          <span>B2B and professional services</span>
-        </div>
-      </div>
+      <p class="made-here">This website was designed and built by Evergreen Doors. <a class="text-link" href="book.html">Ask about yours</a></p>
     </div>
   </section>
 
@@ -336,7 +330,7 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
 
   <section class="closing" id="book" aria-labelledby="book-title">
     <div class="wrap">
-      <h2 id="book-title">Let's talk about your next ten clients.</h2>
+      <h2 id="book-title">Start growing this season.</h2>
     </div>
     <div class="forest" aria-hidden="true">
       <img src="forest-r4.svg" alt="" loading="lazy">
