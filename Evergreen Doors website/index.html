@@ -151,7 +151,10 @@ section.block{padding:clamp(80px,10vw,140px) 0}
 .closing{background:linear-gradient(180deg,var(--sky),#EBF0EA);padding-top:clamp(70px,9vw,120px)}
 .closing .forest{margin-top:clamp(10px,3vw,40px)}
 .closing .forest img{transform:scaleX(-1)}
-.closing h2{font-size:clamp(44px,6.4vw,92px);line-height:.98;color:var(--spruce);max-width:14ch;letter-spacing:-.025em}
+.closing h2{font-size:clamp(44px,6.4vw,92px);line-height:.98;color:var(--spruce);max-width:14ch;letter-spacing:-.025em;margin:0 auto;text-align:center}
+.closing-cta{display:grid;justify-items:center;text-align:center;gap:18px;padding-top:clamp(10px,2vw,24px);padding-bottom:clamp(70px,9vw,120px)}
+.closing-cta .lead{font-family:var(--serif);font-size:clamp(26px,3vw,36px);line-height:1.2;color:#E9EEE7;max-width:24ch}
+.closing-cta .small{color:#C3CFBF;font-size:17px;max-width:46ch;margin-bottom:10px}
 .closing-band{background:var(--spruce);color:#E9EEE7;padding:clamp(30px,4vw,56px) 0 0}
 .closing-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:end;padding-bottom:clamp(70px,9vw,120px)}
 .closing-grid .lead{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);line-height:1.25;color:#E9EEE7;max-width:22ch}
@@ -218,9 +221,6 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
       <h1 id="hero-title">Steady growth that compounds.</h1>
       <div class="hero-foot">
         <p>Evergreen Doors designs and runs client-acquisition systems for service businesses: the lead lists, outreach, and follow-up that turn strangers into booked calls.</p>
-        <div class="hero-actions">
-          <a class="btn" href="book.html">Book an info call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        </div>
       </div>
     </div>
     <div class="forest" aria-hidden="true">
@@ -283,7 +283,7 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
           <div class="svc-body"><p>Content and paid campaigns on Facebook and Instagram that keep you in front of the right people between conversations.</p><ul><li>Campaign setup</li><li>Ad creative</li><li>Audience targeting</li></ul></div>
         </details>
       </div>
-      <p class="made-here">This website was designed and built by Evergreen Doors. <a class="text-link" href="book.html">Ask about yours</a></p>
+      <p class="made-here">This website was designed and built by Evergreen Doors Marketing. <a class="text-link" href="book.html">Ask about yours</a></p>
     </div>
   </section>
 
@@ -339,12 +339,10 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
       <img src="forest-r1.svg" alt="" loading="lazy">
     </div>
     <div class="closing-band">
-      <div class="wrap closing-grid">
+      <div class="wrap closing-cta">
         <p class="lead">A 20-minute call to look at your market and see whether this is a fit.</p>
-        <div>
-          <p class="small">An honest conversation, not a sales pitch. Come with your questions, and you'll leave with a clear next step either way.</p>
-          <a class="btn" href="book.html">Book an info call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        </div>
+        <p class="small">An honest conversation, not a sales pitch. Come with your questions, and you'll leave with a clear next step either way.</p>
+        <a class="btn" href="book.html">Book an info call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
       </div>
       <footer>
         <div class="wrap">
