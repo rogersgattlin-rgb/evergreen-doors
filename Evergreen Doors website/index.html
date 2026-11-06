@@ -60,7 +60,7 @@ footer .wordmark img{height:38px}
 /* Grove: fixed background forest that grows from saplings to full trees as you scroll */
 :root{--grow:0}
 .grove{position:fixed;left:0;right:0;bottom:0;height:100vh;z-index:-1;pointer-events:none;-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,.35),#000 22%);mask-image:linear-gradient(to top,rgba(0,0,0,.35),#000 22%)}
-.grove .g{position:absolute;left:0;right:0;bottom:0;background-repeat:repeat-x;background-position:50% 100%;background-size:auto 100%;height:var(--h1);transform-origin:50% 100%;transform:scaleY(calc(var(--r0) + (1 - var(--r0)) * var(--grow)));will-change:transform}
+.grove .g{position:absolute;left:0;right:0;bottom:0;background-repeat:repeat-x;background-position:50% 100%;background-size:auto 100%;height:calc(var(--h1) * (var(--r0) + (1 - var(--r0)) * var(--grow)))}
 .grove .g4{background-image:url(forest-r4.svg);--r0:.5;--h1:26vh;opacity:.5}
 .grove .g3{background-image:url(forest-r3.svg);--r0:.48;--h1:31vh;opacity:.36;background-position:30% 100%}
 .grove .g2{background-image:url(forest-r2.svg);--r0:.47;--h1:36vh;opacity:.2;background-position:65% 100%}
