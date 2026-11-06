@@ -161,15 +161,15 @@ section.block{padding:clamp(80px,10vw,140px) 0}
 /* Closing bookend */
 .closing{background:transparent;padding-top:clamp(70px,9vw,120px)}
 .closing h2{font-size:clamp(44px,6.4vw,92px);line-height:.98;color:var(--spruce);max-width:14ch;letter-spacing:-.025em}
-.closing-band{padding:clamp(40px,5vw,64px) 0 clamp(150px,30vh,320px)}
-.closing-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:end;padding-bottom:clamp(60px,8vw,100px)}
-.closing-grid .lead{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);line-height:1.25;color:var(--spruce);max-width:22ch}
-.closing-grid p.small{color:var(--body);font-size:17px;max-width:36ch;margin-bottom:24px}
-footer{border-top:1px solid var(--line);padding:26px 0 0;font-size:14px;color:var(--soft)}
+.closing-block .lead{font-family:var(--serif);font-size:clamp(22px,2.3vw,30px);line-height:1.3;color:var(--body);max-width:34ch;margin:clamp(22px,2.5vw,32px) 0 clamp(28px,3vw,36px)}
+.finale{position:relative;aspect-ratio:3/1;min-height:220px;margin-top:clamp(10px,2vw,30px);background:linear-gradient(180deg,rgba(245,246,241,0),var(--paper) 45%)}
+.finale img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%;transform:scaleX(-1)}
+.finale img:nth-child(1){opacity:.5}.finale img:nth-child(2){opacity:.6}.finale img:nth-child(3){opacity:.5}.finale img:nth-child(4){opacity:.42}
+footer{position:relative;margin-top:-1px;background:#59755E;padding:22px 0 26px;font-size:14px;color:#EEF2EC}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 footer .wordmark{color:var(--spruce);font-size:20px}
 .social{display:flex;gap:12px;list-style:none;margin:0;padding:0}
-.social a{display:grid;place-items:center;width:40px;height:40px;border:1px solid rgba(31,58,43,.25);border-radius:50%;color:var(--spruce);transition:background .15s,border-color .15s,color .15s}
+.social a{display:grid;place-items:center;width:40px;height:40px;border:1px solid rgba(238,242,236,.5);border-radius:50%;color:#EEF2EC;transition:background .15s,border-color .15s,color .15s}
 .social a:hover{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
 .social svg{width:18px;height:18px}
 
@@ -192,8 +192,7 @@ footer .wordmark{color:var(--spruce);font-size:20px}
 @media (max-width:640px){
   .closing{text-align:center}
   .closing h2{margin:0 auto}
-  .closing-grid{justify-items:center}
-  .closing-grid .lead,.closing-grid p.small{margin-left:auto;margin-right:auto}
+  .closing-block .lead{margin-left:auto;margin-right:auto}
   footer .wrap{flex-direction:column;justify-content:center;text-align:center}
   body{font-size:16px}
   .toggle{width:40px;height:40px}
@@ -338,28 +337,27 @@ footer .wordmark{color:var(--spruce);font-size:20px}
   </section>
 
   <section class="closing" id="book" aria-labelledby="book-title">
-    <div class="wrap">
+    <div class="wrap closing-block">
       <h2 id="book-title">Start growing this season.</h2>
+      <p class="lead">A 20-minute call to look at your market and see whether this is a fit. An honest conversation, not a sales pitch.</p>
+      <a class="btn" href="book.html">Book an info call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
     </div>
-    <div class="closing-band">
-      <div class="wrap closing-grid">
-        <p class="lead">A 20-minute call to look at your market and see whether this is a fit.</p>
-        <div>
-          <p class="small">An honest conversation, not a sales pitch. Come with your questions, and you'll leave with a clear next step either way.</p>
-          <a class="btn" href="book.html">Book an info call <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
-        </div>
+    <div class="finale" aria-hidden="true">
+      <img src="forest-r4.svg" alt="" loading="lazy">
+      <img src="forest-r3.svg" alt="" loading="lazy">
+      <img src="forest-r2.svg" alt="" loading="lazy">
+      <img src="forest-r1.svg" alt="" loading="lazy">
+    </div>
+    <footer>
+      <div class="wrap">
+        <a class="wordmark" href="#top"><img src="logo-light.svg" width="568" height="130" alt="Evergreen Doors Marketing"></a>
+        <ul class="social" aria-label="Social media">
+          <li><a href="https://www.facebook.com/evergreendoorsmarketing/" target="_blank" rel="noopener" aria-label="Evergreen Doors Marketing on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.5V21z"/></svg></a></li>
+          <li><a href="https://www.instagram.com/evergreendoorsmarketing/" target="_blank" rel="noopener" aria-label="Evergreen Doors Marketing on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a></li>
+        </ul>
+        <span>&copy; 2026 Evergreen Doors. Designed and built in-house.</span>
       </div>
-      <footer>
-        <div class="wrap">
-          <a class="wordmark" href="#top"><img src="logo.svg" width="568" height="130" alt="Evergreen Doors Marketing"></a>
-          <ul class="social" aria-label="Social media">
-            <li><a href="https://www.facebook.com/evergreendoorsmarketing/" target="_blank" rel="noopener" aria-label="Evergreen Doors Marketing on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.5V21z"/></svg></a></li>
-            <li><a href="https://www.instagram.com/evergreendoorsmarketing/" target="_blank" rel="noopener" aria-label="Evergreen Doors Marketing on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a></li>
-          </ul>
-          <span>&copy; 2026 Evergreen Doors. Designed and built in-house.</span>
-        </div>
-      </footer>
-    </div>
+    </footer>
   </section>
 </main>
 </body>
