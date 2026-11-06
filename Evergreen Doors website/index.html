@@ -13,7 +13,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="forest-r1.svg">
 <style>
 :root{
   --sky-top:#D6E2D7; --sky:#E7EDE6; --paper:#F5F6F1; --white:#FCFCF9;
@@ -58,17 +57,27 @@ footer .wordmark img{height:38px}
 .nav-links .nav-cta{display:inline-block;background:var(--gold);color:var(--on-gold);font-weight:600;padding:11px 18px;border-radius:6px;transition:background .15s}
 .nav-links .nav-cta:hover{background:var(--gold-hover);color:var(--on-gold)}
 
-/* Forest (shared by hero and closing section) */
+/* Grove: fixed background forest that grows from saplings to full trees as you scroll */
+:root{--grow:0}
+.grove{position:fixed;left:0;right:0;bottom:0;height:100vh;z-index:-1;pointer-events:none;-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,.35),#000 22%);mask-image:linear-gradient(to top,rgba(0,0,0,.35),#000 22%)}
+.grove .g{position:absolute;left:0;right:0;bottom:0;background-repeat:repeat-x;background-position:50% 100%;background-size:auto 100%;height:calc(var(--h0) + (var(--h1) - var(--h0)) * var(--grow))}
+.grove .g4{background-image:url(forest-r4.svg);--h0:7vh;--h1:30vh;opacity:.5}
+.grove .g3{background-image:url(forest-r3.svg);--h0:8vh;--h1:36vh;opacity:.36;background-position:30% 100%}
+.grove .g2{background-image:url(forest-r2.svg);--h0:9vh;--h1:42vh;opacity:.2;background-position:65% 100%}
+.grove .g1{background-image:url(forest-r1.svg);--h0:10vh;--h1:48vh;opacity:.1;background-position:10% 100%}
+
+/* Forest (closing section) */
 .forest{position:relative;aspect-ratio:3/1;min-height:230px;max-width:100%;margin-top:clamp(24px,4vw,56px)}
 .forest img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%}
-@media (prefers-reduced-motion:no-preference){
-  .hero .forest img{animation:rise 1.5s cubic-bezier(.2,.7,.2,1) both}
-  .hero .forest .l3{animation-delay:.1s}.hero .forest .l2{animation-delay:.2s}.hero .forest .l1{animation-delay:.3s}
-  @keyframes rise{from{transform:translateY(36px);opacity:0}}
-}
 
 /* Hero */
-.hero{background:linear-gradient(180deg,var(--sky-top),var(--sky) 60%,#EBF0EA);padding-top:clamp(140px,17vw,200px);overflow:hidden}
+.hero{background:linear-gradient(180deg,var(--sky-top),rgba(231,237,230,0) 100%);padding:clamp(130px,15vw,180px) 0 clamp(90px,11vw,150px)}
+.hero-svc{list-style:none;margin:clamp(40px,5vw,64px) 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 var(--gutter)}
+.hero-svc a{display:block;height:100%;text-decoration:none;border-top:1.5px solid var(--spruce);padding:18px 0 6px;transition:border-color .15s}
+.hero-svc a:hover{border-color:var(--gold)}
+.hero-svc a:hover .hs-name{color:var(--moss)}
+.hs-name{display:block;font-family:var(--serif);font-size:clamp(22px,2vw,28px);line-height:1.1;color:var(--spruce);margin-bottom:8px;transition:color .15s}
+.hs-desc{display:block;font-size:15px;line-height:1.5;color:var(--body)}
 .hero h1{font-size:clamp(44px,6.6vw,96px);line-height:.98;color:var(--spruce);letter-spacing:-.03em}
 .hero h1 span{display:block;text-wrap:balance}
 .hero-foot{display:grid;gap:30px;justify-items:start;margin-top:clamp(28px,4vw,44px)}
@@ -107,7 +116,7 @@ section.block{padding:clamp(80px,10vw,140px) 0}
 .made-here a{color:var(--spruce)}
 
 /* Experience */
-.experience{background:var(--sky)}
+.experience{background:transparent}
 .exp-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(32px,6vw,96px);align-items:start}
 .exp-grid h2{font-size:clamp(40px,5.2vw,70px);line-height:1.02;color:var(--spruce)}
 .exp-lead{color:var(--body);font-size:19px;margin-top:24px;max-width:46ch}
@@ -135,7 +144,7 @@ section.block{padding:clamp(80px,10vw,140px) 0}
 .bill-note{grid-column:1 / -1;margin-top:clamp(24px,3vw,40px);text-align:center;font-family:var(--serif);font-size:clamp(20px,2vw,24px);color:var(--spruce)}
 
 /* Founder */
-.letter-wrap{background:var(--sky)}
+.letter-wrap{background:transparent}
 .founder-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:center}
 .founder-photo{margin:0}
 .founder-photo img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:4px;background:var(--lichen)}
@@ -168,6 +177,7 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
 
 /* Responsive */
 @media (max-width:960px){
+  .hero-svc{grid-template-columns:1fr 1fr;row-gap:22px}
   .nav-links li:not(.cta-li){display:none}
   .nav-links .nav-cta{padding:9px 14px;font-size:14px}
   .svc-body{grid-template-columns:1fr;padding-right:0;gap:18px}
@@ -193,12 +203,15 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
   .timeline,.bill-grid{grid-template-columns:1fr}
   .letter p{font-size:18px}
   .forest{margin-top:0}
+  .hero-svc{grid-template-columns:1fr}
+  .hero-svc a{padding:14px 0 4px}
   .nav .wordmark img{height:42px}
 }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="grove" aria-hidden="true"><div class="g g4"></div><div class="g g3"></div><div class="g g2"></div><div class="g g1"></div></div>
 
 <header class="nav">
   <div class="wrap">
@@ -219,14 +232,14 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
     <div class="wrap">
       <h1 id="hero-title"><span>Most growth is seasonal.</span> <span>Yours doesn't have to be.</span></h1>
       <div class="hero-foot">
-        <p>Evergreen Doors designs and runs client-acquisition systems for service businesses: the lead lists, outreach, and follow-up that turn strangers into booked calls.</p>
+        <p>We find your next clients, reach out to them, and follow up until they book a call with you. Built for property managers, real estate teams, and service businesses.</p>
       </div>
-    </div>
-    <div class="forest" aria-hidden="true">
-      <img class="l4" src="forest-r4.svg" alt="">
-      <img class="l3" src="forest-r3.svg" alt="">
-      <img class="l2" src="forest-r2.svg" alt="">
-      <img class="l1" src="forest-r1.svg" alt="">
+      <ul class="hero-svc" aria-label="What we do">
+        <li><a href="#services"><span class="hs-name">Lead lists</span><span class="hs-desc">The right prospects in your market, verified and ready to contact.</span></a></li>
+        <li><a href="#services"><span class="hs-name">Outreach campaigns</span><span class="hs-desc">Text, voicemail, and email that start real conversations.</span></a></li>
+        <li><a href="#services"><span class="hs-name">CRM and automation</span><span class="hs-desc">Follow-up that runs on its own, so no lead goes cold.</span></a></li>
+        <li><a href="#services"><span class="hs-name">Websites</span><span class="hs-desc">Sites that turn visitors into booked calls.</span></a></li>
+      </ul>
     </div>
   </section>
 
@@ -357,5 +370,21 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
     </div>
   </section>
 </main>
+<script>
+(function(){
+  var root = document.documentElement;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { root.style.setProperty("--grow", "0.55"); return; }
+  var ticking = false;
+  function update(){
+    var end = Math.max(1, (root.scrollHeight - window.innerHeight) * 0.8);
+    var p = Math.min(1, Math.max(0, window.scrollY / end));
+    root.style.setProperty("--grow", (p * (2 - p)).toFixed(3));
+    ticking = false;
+  }
+  window.addEventListener("scroll", function(){ if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+})();
+</script>
 </body>
 </html>
