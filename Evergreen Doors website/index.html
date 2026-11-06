@@ -60,11 +60,12 @@ footer .wordmark img{height:38px}
 /* Grove: fixed background forest that grows from saplings to full trees as you scroll */
 :root{--grow:0}
 .grove{position:fixed;left:0;bottom:0;width:100%;height:36vh;overflow:visible;z-index:-1;pointer-events:none;-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,.35),#000 22%);mask-image:linear-gradient(to top,rgba(0,0,0,.35),#000 22%)}
+.grove .hedge{transform-box:fill-box;transform-origin:50% 100%;transform:scaleY(calc(.45 + .55 * var(--grow)))}
 .grove .t{transform-box:fill-box;transform-origin:50% 100%;transform:scale(calc(var(--s0) + (1 - var(--s0)) * clamp(0, (var(--grow) - var(--d)) / (1 - var(--d)), 1)))}
 
 /* Forest (closing section) */
 .forest{position:relative;aspect-ratio:3/1;min-height:230px;max-width:100%;margin-top:clamp(24px,4vw,56px)}
-.forest img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.forest .forest-art{position:absolute;inset:0;width:100%;height:100%}
 
 /* Hero */
 .hero{background:linear-gradient(180deg,var(--sky-top),rgba(231,237,230,0) 100%);padding:clamp(130px,15vw,180px) 0 clamp(90px,11vw,150px)}
@@ -157,7 +158,6 @@ section.block{padding:clamp(80px,10vw,140px) 0}
 /* Closing bookend */
 .closing{background:transparent;padding-top:clamp(70px,9vw,120px)}
 .closing .forest{margin-top:clamp(10px,3vw,40px)}
-.closing .forest img{transform:scaleX(-1)}
 .closing h2{font-size:clamp(44px,6.4vw,92px);line-height:.98;color:var(--spruce);max-width:14ch;letter-spacing:-.025em}
 .closing-band{background:var(--spruce);color:#E9EEE7;padding:clamp(30px,4vw,56px) 0 0}
 .closing-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:end;padding-bottom:clamp(70px,9vw,120px)}
@@ -338,12 +338,7 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
     <div class="wrap">
       <h2 id="book-title">Start growing this season.</h2>
     </div>
-    <div class="forest" aria-hidden="true">
-      <img src="forest-r4.svg" alt="" loading="lazy">
-      <img src="forest-r3.svg" alt="" loading="lazy">
-      <img src="forest-r2.svg" alt="" loading="lazy">
-      <img src="forest-r1.svg" alt="" loading="lazy">
-    </div>
+    <div class="forest" aria-hidden="true"></div>
     <div class="closing-band">
       <div class="wrap closing-grid">
         <p class="lead">A 20-minute call to look at your market and see whether this is a fit.</p>
@@ -373,61 +368,86 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
   function rnd(){ seed = (seed + 0x6D2B79F5) | 0; var t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }
   function U(a, b){ return a + (b - a) * rnd(); }
   function el(name, attrs, parent){ var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
-  function dot(g, x, y, r){ el("circle", { cx: x.toFixed(0), cy: y.toFixed(0), r: Math.max(r, 1.5).toFixed(1) }, g); }
-  function trunk(g, x, by, top, w, lean){
-    var l = [], r = [];
-    for (var i = 0; i <= 4; i++){ var t = i / 4, y = by - (by - top) * t, xx = x + lean * t, ww = w * (1 - 0.7 * t); l.push((xx - ww / 2).toFixed(0) + "," + y.toFixed(0)); r.unshift((xx + ww / 2).toFixed(0) + "," + y.toFixed(0)); }
-    el("path", { d: "M" + l.concat(r).join(" L") + "Z" }, g);
-  }
-  function spruce(g, x, by, h){
-    trunk(g, x, by, by - h, Math.max(2, h * 0.03), 0);
-    var top = by - h, levels = Math.floor(h / 12);
-    for (var i = 0; i < levels; i++){
-      var t = i / levels, y = top + t * h * 0.95, half = h * 0.17 * Math.pow(t, 0.9) * U(0.8, 1.15) + 2;
-      for (var side = -1; side <= 1; side += 2){
-        var steps = Math.max(1, Math.floor(half / 9));
-        for (var s = 0; s <= steps; s++){ var f = s / steps; dot(g, x + side * half * f, y + f * f * h * 0.03, h * 0.032 * U(0.85, 1.25) * (1.1 - 0.4 * f)); }
+  function P(x, y){ return x.toFixed(1) + "," + y.toFixed(1); }
+  function conifer(g, x, by, h, wide){
+    var w = h * (wide ? U(0.4, 0.48) : U(0.26, 0.32)), tiers = 6 + Math.floor(h / 30), tw = Math.max(2, h * 0.035);
+    var bottom = by - h * 0.07, sides = [[], []];
+    for (var s = 0; s < 2; s++){
+      var dir = s ? 1 : -1, px = x, py = by - h;
+      for (var i = 1; i <= tiers; i++){
+        var t = i / tiers, ty = by - h + t * (h * 0.93 - h * 0.03), half = (w / 2) * Math.pow(t, 0.92) * U(0.85, 1.12);
+        var tipx = x + dir * half, tipy = ty + h * 0.018;
+        for (var k = 1; k <= 3; k++){
+          var f = k / 4, jx = px + (tipx - px) * f, jy = py + (tipy - py) * f;
+          sides[s].push(P(jx + dir * h * 0.006 * (k % 2 ? 1 : -0.4), jy - h * 0.006 * (k % 2 ? 1 : 0)));
+        }
+        sides[s].push(P(tipx, tipy));
+        px = x + dir * half * U(0.45, 0.6); py = tipy + h * 0.012;
+        if (i < tiers) sides[s].push(P(px, py));
       }
     }
+    var d = "M" + P(x, by - h) + " L" + sides[0].join(" L") + " L" + P(x - tw / 2, bottom) + " L" + P(x - tw / 2, by) + " L" + P(x + tw / 2, by) + " L" + P(x + tw / 2, bottom) + " L" + sides[1].reverse().join(" L") + "Z";
+    el("path", { d: d }, g);
   }
-  function pine(g, x, by, h){
-    var lean = U(-h * 0.04, h * 0.04);
-    trunk(g, x, by, by - h * 0.92, Math.max(2, h * 0.035), lean);
-    var ct = by - h, ch = h * U(0.35, 0.5), n = 4 + Math.floor(rnd() * 3);
-    for (var k = 0; k < n; k++){
-      var t = rnd(), cy = ct + t * ch, sp = h * 0.15 * (0.4 + t), bx = x + lean * (1 - (cy - ct) / h), cx = bx + U(-sp, sp);
-      el("path", { d: "M" + bx.toFixed(0) + "," + (cy + h * 0.04).toFixed(0) + " L" + cx.toFixed(0) + "," + cy.toFixed(0), "stroke-width": Math.max(1.2, h * 0.01).toFixed(1), fill: "none" }, g);
-      var cr = h * U(0.05, 0.075);
-      for (var j = 0; j < 5; j++){ var a = U(0, 6.283), d = U(0, cr); dot(g, cx + Math.cos(a) * d * 1.4, cy + Math.sin(a) * d * 0.6, cr * U(0.45, 0.7)); }
+  function blob(g, cx, cy, rx, ry, n){
+    var pts = [];
+    for (var i = 0; i < n; i++){ var a = (i / n) * 6.2832 + U(-0.08, 0.08), k = U(0.88, 1.06); pts.push([cx + Math.cos(a) * rx * k, cy + Math.sin(a) * ry * k, a]); }
+    var d = "M" + P(pts[0][0], pts[0][1]);
+    for (var j = 0; j < n; j++){
+      var p = pts[j], q = pts[(j + 1) % n], am = (p[2] + (j === n - 1 ? q[2] + 6.2832 : q[2])) / 2, bulge = U(1.12, 1.22);
+      d += " Q" + P(cx + Math.cos(am) * rx * bulge, cy + Math.sin(am) * ry * bulge) + " " + P(q[0], q[1]);
     }
+    el("path", { d: d + "Z" }, g);
   }
-  function broadleaf(g, x, by, h){
-    trunk(g, x, by, by - h * 0.6, Math.max(2, h * 0.04), 0);
-    var cr = h * U(0.24, 0.3), cy0 = by - h + cr;
-    for (var k = 0; k < 4; k++){
-      var a = U(0, 6.283), d = U(0.2, 0.7) * cr, sx = x + Math.cos(a) * d * 1.1, sy = cy0 + Math.sin(a) * d * 0.8, sr = cr * U(0.4, 0.55);
-      for (var j = 0; j < 5; j++){ var b = U(0, 6.283), e = U(0, sr); dot(g, sx + Math.cos(b) * e, sy + Math.sin(b) * e * 0.8, sr * U(0.3, 0.45)); }
-    }
+  function leafy(g, x, by, h){
+    var tw = Math.max(2, h * 0.045), cy = by - h * U(0.6, 0.66), rx = h * U(0.22, 0.29), ry = h * U(0.27, 0.32);
+    el("path", { d: "M" + P(x - tw / 2, by) + " L" + P(x - tw * 0.3, cy) + " L" + P(x + tw * 0.3, cy) + " L" + P(x + tw / 2, by) + "Z" }, g);
+    el("path", { d: "M" + P(x, cy + ry * 0.6) + " L" + P(x - rx * 0.5, cy + ry * 0.1) + " M" + P(x, cy + ry * 0.4) + " L" + P(x + rx * 0.55, cy - ry * 0.05), fill: "none", "stroke-width": (tw * 0.35).toFixed(1) }, g);
+    blob(g, x, cy, rx, ry, 13 + Math.floor(rnd() * 5));
+    blob(g, x - rx * U(0.45, 0.6), cy + ry * U(0.25, 0.4), rx * U(0.5, 0.62), ry * U(0.45, 0.55), 9);
+    blob(g, x + rx * U(0.45, 0.6), cy + ry * U(0.15, 0.35), rx * U(0.5, 0.62), ry * U(0.45, 0.55), 9);
   }
-  var svg = el("svg", { "class": "grove", viewBox: "0 0 1440 480", preserveAspectRatio: "xMidYMax slice", "aria-hidden": "true", focusable: "false" });
-  var layers = [
-    [380, 80, 150, 52, "#C2D3BF", 0.55],
-    [410, 95, 185, 66, "#92AE8F", 0.4],
-    [440, 110, 220, 84, "#5C805F", 0.24],
-    [470, 140, 280, 120, "#1F3A2B", 0.11]
-  ];
-  layers.forEach(function(L){
-    var gy = L[0], layer = el("g", { fill: L[4], stroke: L[4], opacity: L[5] }, svg);
-    var x = U(-10, L[3]);
-    while (x < 1460){
-      var h = U(L[1], L[2]); if (rnd() < 0.2) h *= 0.6;
-      var roll = rnd(), by = gy + U(-3, 5);
-      var g = el("g", { "class": "t", style: "--s0:" + U(0.18, 0.32).toFixed(2) + ";--d:" + U(0, 0.35).toFixed(2) }, layer);
-      if (roll < 0.6) spruce(g, x, by, h); else if (roll < 0.88) pine(g, x, by, h); else broadleaf(g, x, by, h);
-      x += U(L[3] * 0.5, L[3] * 1.4);
-    }
-  });
-  document.body.insertBefore(svg, document.body.firstChild);
+  function forest(cls, layers, grows){
+    var svg = el("svg", { "class": cls, viewBox: "0 0 1440 480", preserveAspectRatio: "xMidYMax slice", "aria-hidden": "true", focusable: "false" });
+    layers.forEach(function(L){  /* ground, min height, max height, spacing, colour, opacity, treeline height */
+      var gy = L[0], layer = el("g", { fill: L[4], stroke: L[4], opacity: L[5] }, svg);
+      if (L[6]){
+        /* a continuous, leafy-edged treeline so there is always a solid line of trees */
+        var top = gy - L[6], hd = "M-20,480 L-20," + top.toFixed(1), hx = -20;
+        while (hx < 1460){
+          var sw = L[6] * U(1.0, 2.2), peak = top - L[6] * U(0.2, 1.1);
+          hd += " Q" + P(hx + sw / 2, peak) + " " + P(hx + sw, top + U(-3, 3));
+          hx += sw;
+        }
+        el("path", grows ? { "class": "hedge", d: hd + " L1460,480Z" } : { d: hd + " L1460,480Z" }, layer);
+      }
+      var x = U(-10, L[3]);
+      while (x < 1470){
+        var h = U(L[1], L[2]); if (rnd() < 0.18) h *= 0.65;
+        var roll = rnd(), by = gy + U(-2, 4);
+        var g = el("g", grows ? { "class": "t", style: "--s0:" + U(0.22, 0.36).toFixed(2) + ";--d:" + U(0, 0.35).toFixed(2) } : {}, layer);
+        if (roll < 0.45) conifer(g, x, by, h, false); else if (roll < 0.75) conifer(g, x, by, h * 0.85, true); else leafy(g, x, by, h * 0.8);
+        x += U(L[3] * 0.6, L[3] * 1.35);
+      }
+    });
+    return svg;
+  }
+  /* growing background grove */
+  document.body.insertBefore(forest("grove", [
+    [384, 85, 155, 26, "#C2D3BF", 0.55, 26],
+    [414, 100, 190, 32, "#92AE8F", 0.4, 0],
+    [444, 115, 225, 40, "#5C805F", 0.24, 0],
+    [474, 145, 280, 52, "#1F3A2B", 0.11, 0]
+  ], true), document.body.firstChild);
+  /* the full-grown forest at the bottom of the page */
+  seed = 71;
+  var finale = document.querySelector(".closing .forest");
+  if (finale) finale.appendChild(forest("forest-art", [
+    [300, 95, 185, 30, "#C2D3BF", 1, 30],
+    [345, 115, 235, 38, "#92AE8F", 1, 0],
+    [395, 135, 285, 48, "#5C805F", 1, 0],
+    [442, 175, 380, 66, "#1F3A2B", 1, 22]
+  ], false));
 
   var root = document.documentElement;
   if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { root.style.setProperty("--grow", "0.6"); return; }
