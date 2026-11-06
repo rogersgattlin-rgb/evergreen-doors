@@ -160,18 +160,16 @@ section.block{padding:clamp(80px,10vw,140px) 0}
 
 /* Closing bookend */
 .closing{background:transparent;padding-top:clamp(70px,9vw,120px)}
-.closing .forest{margin-top:clamp(10px,3vw,40px)}
-.closing .forest img{transform:scaleX(-1)}
 .closing h2{font-size:clamp(44px,6.4vw,92px);line-height:.98;color:var(--spruce);max-width:14ch;letter-spacing:-.025em}
-.closing-band{background:var(--spruce);color:#E9EEE7;padding:clamp(30px,4vw,56px) 0 0}
-.closing-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:end;padding-bottom:clamp(70px,9vw,120px)}
-.closing-grid .lead{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);line-height:1.25;color:#E9EEE7;max-width:22ch}
-.closing-grid p.small{color:#C3CFBF;font-size:17px;max-width:36ch;margin-bottom:24px}
-footer{border-top:1px solid var(--line-dark);padding:26px 0 34px;font-size:14px;color:#9FB09C}
+.closing-band{padding:clamp(40px,5vw,64px) 0 clamp(150px,30vh,320px)}
+.closing-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:end;padding-bottom:clamp(60px,8vw,100px)}
+.closing-grid .lead{font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);line-height:1.25;color:var(--spruce);max-width:22ch}
+.closing-grid p.small{color:var(--body);font-size:17px;max-width:36ch;margin-bottom:24px}
+footer{border-top:1px solid var(--line);padding:26px 0 0;font-size:14px;color:var(--soft)}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
-footer .wordmark{color:#E9EEE7;font-size:20px}
+footer .wordmark{color:var(--spruce);font-size:20px}
 .social{display:flex;gap:12px;list-style:none;margin:0;padding:0}
-.social a{display:grid;place-items:center;width:40px;height:40px;border:1px solid rgba(194,211,191,.35);border-radius:50%;color:#E9EEE7;transition:background .15s,border-color .15s,color .15s}
+.social a{display:grid;place-items:center;width:40px;height:40px;border:1px solid rgba(31,58,43,.25);border-radius:50%;color:var(--spruce);transition:background .15s,border-color .15s,color .15s}
 .social a:hover{background:var(--gold);border-color:var(--gold);color:var(--on-gold)}
 .social svg{width:18px;height:18px}
 
@@ -343,12 +341,6 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
     <div class="wrap">
       <h2 id="book-title">Start growing this season.</h2>
     </div>
-    <div class="forest" aria-hidden="true">
-      <img src="forest-r4.svg" alt="" loading="lazy">
-      <img src="forest-r3.svg" alt="" loading="lazy">
-      <img src="forest-r2.svg" alt="" loading="lazy">
-      <img src="forest-r1.svg" alt="" loading="lazy">
-    </div>
     <div class="closing-band">
       <div class="wrap closing-grid">
         <p class="lead">A 20-minute call to look at your market and see whether this is a fit.</p>
@@ -359,7 +351,7 @@ footer .wordmark{color:#E9EEE7;font-size:20px}
       </div>
       <footer>
         <div class="wrap">
-          <a class="wordmark" href="#top"><img src="logo-light.svg" width="568" height="130" alt="Evergreen Doors Marketing"></a>
+          <a class="wordmark" href="#top"><img src="logo.svg" width="568" height="130" alt="Evergreen Doors Marketing"></a>
           <ul class="social" aria-label="Social media">
             <li><a href="https://www.facebook.com/evergreendoorsmarketing/" target="_blank" rel="noopener" aria-label="Evergreen Doors Marketing on Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.5V21z"/></svg></a></li>
             <li><a href="https://www.instagram.com/evergreendoorsmarketing/" target="_blank" rel="noopener" aria-label="Evergreen Doors Marketing on Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a></li>
