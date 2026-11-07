@@ -138,7 +138,8 @@ section.block{padding:clamp(80px,10vw,140px) 0}
 /* Billing */
 .billing{border-top:1px solid var(--line)}
 .bill-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,4fr) minmax(0,4fr);gap:var(--gutter)}
-.bill-grid h2{font-size:clamp(40px,5vw,64px);line-height:1;color:var(--spruce)}
+.bill-grid > div:first-child{grid-column:1 / -1}
+    .bill-grid h2{font-size:clamp(40px,5vw,64px);line-height:1;color:var(--spruce)}
 .bill-item{border-top:1.5px solid var(--spruce);padding-top:20px}
 .bill-item h3{font-size:30px;color:var(--spruce);line-height:1.1;margin-bottom:12px}
 .bill-item p{color:var(--body)}
@@ -313,8 +314,9 @@ footer .wordmark{color:var(--spruce);font-size:20px}
   <section class="block billing" aria-labelledby="billing-title">
     <div class="wrap bill-grid">
       <div><h2 id="billing-title">How billing works</h2></div>
-      <div class="bill-item"><h3>Hourly, invoiced weekly</h3><p>You see exactly what was worked on each week and pay only for time spent.</p></div>
-      <div class="bill-item"><h3>Commission: our skin in the game</h3><p>We also earn a share of first-year revenue from each new client you sign. If a lead never becomes a client, we earn nothing on it. That keeps our incentive the same as yours: real clients, not just activity.</p></div>
+      <div class="bill-item"><h3>A fixed price for every build</h3><p>Websites, CRM setup, and campaign launches are quoted up front, so you know the full cost before we start.</p></div>
+      <div class="bill-item"><h3>Simple billing for ongoing campaigns</h3><p>Once campaigns are live, you get a clear weekly invoice showing what was worked on, with a cap you approve.</p></div>
+      <div class="bill-item"><h3>Commission: our skin in the game</h3><p>Where it's allowed for your business, we also earn a share of first-year revenue from each new client you sign. If a lead never becomes a client, we earn nothing on it. That keeps our incentive the same as yours: real clients, not just activity.</p></div>
       <p class="bill-note">No retainers and no equity. Rates are covered on the info call.</p>
     </div>
   </section>
