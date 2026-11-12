@@ -6,6 +6,20 @@
 <title>Book an Info Call | Evergreen Doors Marketing</title>
 <meta name="description" content="Book a free 20-minute info call with Evergreen Doors Marketing. Answer a few quick questions, then pick a time.">
 <meta name="theme-color" content="#1F3A2B">
+<link rel="canonical" href="https://evergreendoorsmarketing.com/book.html">
+<meta property="og:site_name" content="Evergreen Doors Marketing">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://evergreendoorsmarketing.com/book.html">
+<meta property="og:title" content="Book an Info Call | Evergreen Doors Marketing">
+<meta property="og:description" content="Book a free 20-minute info call with Evergreen Doors Marketing. Answer a few quick questions, then pick a time.">
+<meta property="og:image" content="https://evergreendoorsmarketing.com/gattlin.jpg">
+<meta property="og:image:width" content="880">
+<meta property="og:image:height" content="1100">
+<meta property="og:image:alt" content="Gattlin Rogers, founder of Evergreen Doors Marketing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Book an Info Call | Evergreen Doors Marketing">
+<meta name="twitter:description" content="Book a free 20-minute info call with Evergreen Doors Marketing. Answer a few quick questions, then pick a time.">
+<meta name="twitter:image" content="https://evergreendoorsmarketing.com/gattlin.jpg">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,6 +70,8 @@ legend{font-weight:600;font-size:15px;margin-bottom:10px;padding:0;color:var(--i
 .check input{width:18px;height:18px;margin:0;accent-color:var(--spruce);flex:none}
 .check:has(input:checked){border-color:var(--spruce);background:#EEF2EC}
 .field.bad .check{border-color:var(--error)}
+.consent{align-items:flex-start;margin-top:10px;font-size:15px;font-weight:400;line-height:1.5;color:var(--body)}
+.consent input{margin-top:2px}
 .actions{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:4px}
 .actions p{font-size:14px;color:var(--soft);max-width:34ch}
 .btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border:0;border-radius:6px;background:var(--gold);color:var(--on-gold);font:600 16px/1 var(--sans);cursor:pointer;text-decoration:none}
@@ -94,6 +110,9 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
           <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required><p class="err">Enter your name.</p></div>
           <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required><p class="err">Enter a valid email address.</p></div>
         </div>
+        <div class="field" id="phoneField"><label for="phone">Phone <span class="opt">(optional)</span></label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel">
+          <label class="check consent"><input type="checkbox" id="sms_consent" name="sms_consent" value="yes"> <span><span id="smsText">Text me about my inquiry. Message frequency varies. Message and data rates may apply. Reply STOP to opt out, HELP for help.</span> Optional, and not required to book. <a href="privacy.html#sms">Privacy Policy</a></span></label>
+          <p class="err">Add a phone number, or uncheck the text message box.</p></div>
         <div class="row">
           <div class="field"><label for="company">Company name</label><input id="company" name="company" autocomplete="organization" required><p class="err">Enter your company name.</p></div>
           <div class="field"><label for="website">Website <span class="opt">(optional)</span></label><input id="website" name="website" inputmode="url" placeholder="yourcompany.com"></div>
@@ -108,7 +127,7 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
               <option>B2B or professional services</option>
               <option>Other</option>
             </select><p class="err">Choose the closest option.</p></div>
-          <div class="field"><label for="market">Main market or city</label><input id="market" name="market" placeholder="Scottsdale, AZ" required><p class="err">Enter your main market.</p></div>
+          <div class="field"><label for="market">Main market or city</label><input id="market" name="market" placeholder="Provo, UT" required><p class="err">Enter your main market.</p></div>
         </div>
         <div class="field"><label for="source">How do most of your new clients find you today?</label>
           <select id="source" name="source" required>
@@ -124,8 +143,8 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
             <label class="check"><input type="checkbox" name="needs" value="Lead lists"> Lead lists</label>
             <label class="check"><input type="checkbox" name="needs" value="Outreach campaigns"> Outreach campaigns</label>
             <label class="check"><input type="checkbox" name="needs" value="CRM and automation"> CRM and automation</label>
-            <label class="check"><input type="checkbox" name="needs" value="Website design or redesign"> Website design or redesign</label>
-            <label class="check"><input type="checkbox" name="needs" value="Social media and ad creative"> Social media and ad creative</label>
+            <label class="check"><input type="checkbox" name="needs" value="Website creation and redesign"> Website creation and redesign</label>
+            <label class="check"><input type="checkbox" name="needs" value="Organic social media content and creative"> Organic social media content and creative</label>
             <label class="check"><input type="checkbox" name="needs" value="Not sure yet"> Not sure yet</label>
           </div><p class="err">Choose at least one.</p></fieldset>
         <div class="field"><label for="challenge">What's the biggest thing holding back your growth right now?</label><textarea id="challenge" name="challenge" maxlength="800" required></textarea><p class="err">Tell me a little about your biggest challenge.</p></div>
@@ -157,10 +176,24 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
   </section>
 </main>
 
-<footer>&copy; 2026 Evergreen Doors Marketing LLC &middot; <a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a></footer>
+<footer>&copy; 2026 Evergreen Doors Marketing LLC &middot; <a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a> &middot; <a href="mailto:gattlin@evergreendoorsmarketing.com">gattlin@evergreendoorsmarketing.com</a> <!-- TODO(Gattlin): add LinkedIn link here once the company LinkedIn URL exists --></footer>
 
 <script>
 (function(){
+  /* ============================================================
+     LEAD CAPTURE ENDPOINT: this is where the CRM or automation
+     endpoint goes. Paste its webhook URL between the quotes (for
+     example a GoHighLevel inbound webhook, or a Zapier or Make
+     "catch hook"). When someone finishes the questions, their
+     answers are POSTed to it as JSON, so people who never pick a
+     time are not lost.
+     Leave it empty ("") and nothing is sent anywhere.
+     The endpoint must accept cross-origin JSON POSTs from this site.
+     The request is fire and forget: if it fails, the Calendly step
+     still loads exactly as before.
+     ============================================================ */
+  const LEAD_WEBHOOK_URL = "";
+
   var CAL = "https://calendly.com/gattlin-evergreendoorsmarketing/20min";
   var form = document.getElementById("qform");
   var step1 = document.getElementById("step1"), step2 = document.getElementById("step2");
@@ -169,6 +202,12 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
   function val(id){ return document.getElementById(id).value.trim(); }
   function check(field){
     var el = field.querySelector("input,select,textarea");
+    /* phone is optional, but a text-message opt-in needs a number to go with it */
+    if (field.id === "phoneField") {
+      var okPhone = !(document.getElementById("sms_consent").checked && val("phone") === "");
+      field.classList.toggle("bad", !okPhone);
+      return okPhone;
+    }
     var ok = field.classList.contains("group") ? field.querySelectorAll("input:checked").length > 0
       : (!el.required || (el.value.trim() !== "" && (el.type !== "email" || emailRe.test(el.value.trim()))));
     field.classList.toggle("bad", !ok);
@@ -182,8 +221,47 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
     return Array.prototype.map.call(form.querySelectorAll("input[name=needs]:checked"), function(i){ return i.value; }).join(", ");
   }
 
+  function smsConsent(){
+    return val("phone") !== "" && document.getElementById("sms_consent").checked;
+  }
+
+  /* Sends the answers to LEAD_WEBHOOK_URL. Does nothing while that constant is empty.
+     Never throws and never waits, so it cannot block or delay the calendar. */
+  var lastLead = "";
+  function sendLead(){
+    if (!LEAD_WEBHOOK_URL) return;
+    try {
+      var lead = {
+        name: val("name"),
+        email: val("email"),
+        phone: val("phone"),
+        sms_consent: smsConsent(),
+        sms_consent_text: smsConsent() ? document.getElementById("smsText").textContent.trim() : "",
+        company: val("company"),
+        website: val("website"),
+        industry: val("industry"),
+        market: val("market"),
+        client_source: val("source"),
+        needs: Array.prototype.map.call(form.querySelectorAll("input[name=needs]:checked"), function(i){ return i.value; }),
+        challenge: val("challenge"),
+        heard_from: val("heard"),
+        page_url: window.location.href
+      };
+      var key = JSON.stringify(lead);
+      if (key === lastLead) return; /* same answers submitted again: don't send twice */
+      lastLead = key;
+      lead.submitted_at = new Date().toISOString();
+      window.fetch(LEAD_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(lead),
+        keepalive: true
+      }).catch(function(){});
+    } catch (err) {}
+  }
+
   function summary(){
-    return [
+    var lines = [
       "Needs help with: " + needs(),
       "Company: " + val("company"),
       "Website: " + (val("website") || "n/a"),
@@ -192,7 +270,9 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
       "Clients come from: " + val("source"),
       "Biggest challenge: " + val("challenge"),
       "Heard about us: " + val("heard")
-    ].join("\n");
+    ];
+    if (val("phone")) lines.push("Phone: " + val("phone"), "OK to text: " + (smsConsent() ? "yes" : "no"));
+    return lines.join("\n");
   }
 
   function showCalendar(){
@@ -236,6 +316,7 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
     var fields = Array.prototype.slice.call(form.querySelectorAll(".field"));
     var bad = fields.filter(function(f){ return !check(f); });
     if (bad.length) { bad[0].querySelector("input,select,textarea").focus(); return; }
+    sendLead();
     showCalendar();
     step1.hidden = true; step2.hidden = false;
     window.scrollTo(0, 0);
