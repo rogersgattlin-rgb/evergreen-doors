@@ -253,7 +253,9 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
       lead.submitted_at = new Date().toISOString();
       window.fetch(LEAD_WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        /* text/plain keeps this a "simple" request, so Google Apps Script (and other
+           endpoints without CORS preflight support) accept it; the body is still JSON */
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(lead),
         keepalive: true
       }).catch(function(){});
