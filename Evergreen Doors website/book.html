@@ -176,7 +176,7 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
   </section>
 </main>
 
-<footer>&copy; 2026 Evergreen Doors Marketing LLC &middot; <a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a> &middot; <a href="mailto:gattlin@evergreendoorsmarketing.com">gattlin@evergreendoorsmarketing.com</a> <!-- TODO(Gattlin): add LinkedIn link here once the company LinkedIn URL exists --></footer>
+<footer>&copy; 2026 Evergreen Doors Marketing LLC &middot; <a href="faq.html">FAQ</a> &middot; <a href="privacy.html">Privacy Policy</a> &middot; <a href="terms.html">Terms of Use</a> &middot; <a href="mailto:gattlin@evergreendoorsmarketing.com">gattlin@evergreendoorsmarketing.com</a> <!-- TODO(Gattlin): add LinkedIn link here once the company LinkedIn URL exists --></footer>
 
 <script>
 (function(){
@@ -253,7 +253,9 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
       lead.submitted_at = new Date().toISOString();
       window.fetch(LEAD_WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        /* text/plain keeps this a "simple" request, so Google Apps Script (and other
+           endpoints without CORS preflight support) accept it; the body is still JSON */
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(lead),
         keepalive: true
       }).catch(function(){});
