@@ -324,10 +324,25 @@ footer{border-top:1px solid var(--line);padding:24px var(--gutter);font-size:14p
     var bad = fields.filter(function(f){ return !check(f); });
     if (bad.length) { bad[0].querySelector("input,select,textarea").focus(); return; }
     sendLead();
+    track("generate_lead", { form_name: "booking_questions" });
     showCalendar();
     step1.hidden = true; step2.hidden = false;
     window.scrollTo(0, 0);
     document.getElementById("t-title").focus();
+  });
+
+  /* Google Analytics events. No names, emails, or answers are sent, only that the step happened. */
+  var tracked = {};
+  function track(name, params){
+    if (tracked[name]) return; /* count each step once per page view */
+    tracked[name] = true;
+    try { if (typeof window.gtag === "function") window.gtag("event", name, params || {}); } catch (err) {}
+  }
+  /* Calendly tells the page when a time is picked and booked */
+  window.addEventListener("message", function(e){
+    if (e.origin !== "https://calendly.com" || !e.data || typeof e.data.event !== "string") return;
+    if (e.data.event === "calendly.date_and_time_selected") track("select_call_time", { method: "calendly" });
+    if (e.data.event === "calendly.event_scheduled") track("book_call", { method: "calendly" });
   });
 
   document.getElementById("editBtn").addEventListener("click", function(){
